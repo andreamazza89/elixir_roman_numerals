@@ -7,7 +7,14 @@ defmodule NumberConverter do
   def arabic_to_numeral(100), do: "C"
   def arabic_to_numeral(500), do: "D"
   def arabic_to_numeral(1000), do: "M"
-#  def arabic_to_numeral(arabic) do
-#    "I"
-#  end
+  def arabic_to_numeral(arabic) do
+    result = ""
+    
+    #cond do
+    #  arabic in 5..8 ->
+    #    "V" <> String.duplicate("I", arabic - 5)    
+    #  arabic in 10..38 ->
+    #    String.duplicate("X", div(arabic, 10)) <> String.duplicate("I", arabic - 10)    
+    #end
+  end
 end

@@ -32,4 +32,29 @@ defmodule NumberConverterTest do
   test "&arabic_to_numeral/1 returns M when given 1000" do
     assert NumberConverter.arabic_to_numeral(1000) == "M"
   end
+
+  #test "&arabic_to_numeral/1 returns IV when given 4" do
+  #  assert NumberConverter.arabic_to_numeral(4) == "IV"
+  #end
+
+  #test "&arabic_to_numeral/1 returns IX when given 9" do
+  #  assert NumberConverter.arabic_to_numeral(9) == "IX"
+  #end
+
+  test "&arabic_to_numeral/1 returns VI when given 6" do
+    assert NumberConverter.arabic_to_numeral(6) == "VI"
+  end
+
+  test "&arabic_to_numeral/1 returns VII when given 7" do
+    assert NumberConverter.arabic_to_numeral(7) == "VII"
+  end
+
+  test "&arabic_to_numeral/1 returns XI when given 11" do
+    assert NumberConverter.arabic_to_numeral(11) == "XI"
+  end
+
+  test "&arabic_to_numeral/1 returns XXI when given 21" do
+    assert NumberConverter.arabic_to_numeral(21) == "XXI"
+  end
+  
 end
