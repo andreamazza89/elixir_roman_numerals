@@ -1,24 +1,13 @@
 # ElixirRomanNumerals
 
-**TODO: Add description**
+My very first kata in Elixir! :bowtie:
 
-## Installation
+### Requirements
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Write a function that converts arabic numbers into roman numerals, up to 3000.
 
-  1. Add `elixir_roman_numerals` to your list of dependencies in `mix.exs`:
+See a few examples below: 
 
-    ```elixir
-    def deps do
-      [{:elixir_roman_numerals, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `elixir_roman_numerals` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:elixir_roman_numerals]]
-    end
-    ```
-
+- NumberConverter.arabic_to_subtractive_numerals(1) => 'I'
+- NumberConverter.arabic_to_subtractive_numerals(15) => 'XV'
+- NumberConverter.arabic_to_subtractive_numerals(4) => 'IV'
