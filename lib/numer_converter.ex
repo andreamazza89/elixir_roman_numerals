@@ -1,57 +1,32 @@
 defmodule NumberConverter do
 
-  def arabic_to_numeral(0), do: ""
+  @tokens [%{value: 1000, symbol: "M"}, 
+           %{value: 900, symbol: "CM"},
+           %{value: 500, symbol: "D"},
+           %{value: 400, symbol: "CD"},
+           %{value: 100, symbol: "C"},
+           %{value: 90, symbol: "XC"},
+           %{value: 50, symbol: "L"},
+           %{value: 40, symbol: "XL"},
+           %{value: 10, symbol: "X"},
+           %{value: 9, symbol: "IX"},
+           %{value: 5, symbol: "V"},
+           %{value: 4, symbol: "IV"},
+           %{value: 1, symbol: "I"}]
 
-  def arabic_to_numeral(arabic) when (arabic - 1000) >= 0 do
-    "M" <> arabic_to_numeral(arabic - 1000)
+  def arabic_to_numeral(arabic) do
+    accumulate_tokens(arabic, @tokens)
   end
 
-  def arabic_to_numeral(arabic) when (arabic - 900) >= 0 do
-    "CM" <> arabic_to_numeral(arabic - 900)
-  end
+  defp accumulate_tokens(number_left, tokens) do
+    current_token = Enum.find(tokens, fn(el) -> number_left - el.value >= 0  end)
 
-  def arabic_to_numeral(arabic) when (arabic - 500) >= 0 do
-    "D" <> arabic_to_numeral(arabic - 500)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 400) >= 0 do
-    "CD" <> arabic_to_numeral(arabic - 400)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 100) >= 0 do
-    "C" <> arabic_to_numeral(arabic - 100)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 90) >= 0 do
-    "XC" <> arabic_to_numeral(arabic - 90)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 50) >= 0 do
-    "L" <> arabic_to_numeral(arabic - 50)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 40) >= 0 do
-    "XL" <> arabic_to_numeral(arabic - 40)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 10) >= 0 do
-    "X" <> arabic_to_numeral(arabic - 10)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 9) >= 0 do
-    "IX" <> arabic_to_numeral(arabic - 9)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 5) >= 0 do
-    "V" <> arabic_to_numeral(arabic - 5)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 4) >= 0 do
-    "IV" <> arabic_to_numeral(arabic - 4)
-  end
-
-  def arabic_to_numeral(arabic) when (arabic - 1) >= 0 do
-    "I" <> arabic_to_numeral(arabic - 1)
+    if current_token == nil do
+      ""
+    else
+      new_number = number_left - current_token.value
+      current_token.symbol <> accumulate_tokens(new_number, tokens) 
+    end
   end
 
 end
