@@ -1,20 +1,27 @@
 defmodule NumberConverter do
-  def arabic_to_numeral(0), do: ""
-  def arabic_to_numeral(1), do: "I"
-  def arabic_to_numeral(5), do: "V"
-  def arabic_to_numeral(10), do: "X"
-  def arabic_to_numeral(50), do: "L"
-  def arabic_to_numeral(100), do: "C"
-  def arabic_to_numeral(500), do: "D"
-  def arabic_to_numeral(1000), do: "M"
+  @symbols [ %{ a: "I", b: "V", c: "X"},
+             %{ a: "X", b: "L", c: "C"},
+             %{ a: "C", b: "D", c: "M"},
+             %{ a: "M"}]
+
   def arabic_to_numeral(arabic) do
-    result = ""
-    
-    #cond do
-    #  arabic in 5..8 ->
-    #    "V" <> String.duplicate("I", arabic - 5)    
-    #  arabic in 10..38 ->
-    #    String.duplicate("X", div(arabic, 10)) <> String.duplicate("I", arabic - 10)    
-    #end
-  end
+    digits = Integer.digits(arabic) 
+    List.foldr(digits, accumulator = [output: "", position: 0], fn(el, acc) -> 
+      [output: cond do
+        el == 0 ->
+          ""
+        el in 1..3 ->
+          Enum.at(@symbols, accumulator[:position])[:a] |> String.duplicate(el)
+        el == 4 ->
+          Enum.at(@symbols, accumulator[:position])[:a] <> Enum.at(@symbols, position)[:b]
+        el == 5 ->
+          Enum.at(@symbols, accumulator[:position])[:b]
+        el in 6..8 ->
+          postfix = Enum.at(@symbols, position)[:a] |> String.duplicate(el - 5)
+          Enum.at(@symbols, accumulator[:position])[:b] <> postfix
+        el == 9 ->
+          Enum.at(@symbols, position)[:a] <> Enum.at(@symbols, position)[:c]
+      end <> acc, position: accumulator[:position] + 1]
+    end)
+  end 
 end
