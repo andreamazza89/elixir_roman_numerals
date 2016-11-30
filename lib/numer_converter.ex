@@ -23,7 +23,7 @@ defmodule NumberConverter do
   end
 
   defp do_arabic_to_numeral(number_left, tokens = [{arabic, roman} | _ ]) 
-    when number_left - arabic >= 0 do
+    when number_left >= arabic do
       roman <> do_arabic_to_numeral(number_left - arabic, tokens)
   end
   
